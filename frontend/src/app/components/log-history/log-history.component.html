@@ -1,0 +1,120 @@
+<div class="history">
+  <div class="history__header">
+    <div>
+      <h1 class="history__title">Log History</h1>
+      <p class="history__subtitle">{{ totalCount() }} analyzed entries</p>
+    </div>
+    <a routerLink="/" class="btn btn--accent">+ Analyze New Log</a>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="alert alert--error">{{ errorMessage() }}</div>
+  }
+
+  @if (isLoading()) {
+    <div class="loading">
+      <div class="loading__spinner"></div>
+      <span>Loading logs...</span>
+    </div>
+  } @else if (logs().length === 0) {
+    <div class="empty">
+      <div class="empty__icon">📂</div>
+      <p class="empty__text">No logs analyzed yet.</p>
+      <a routerLink="/" class="btn btn--accent">Analyze your first log</a>
+    </div>
+  } @else {
+    <div class="log-list">
+      @for (log of logs(); track log.id) {
+        <div
+          class="log-card"
+          [class.log-card--expanded]="isExpanded(log.id)"
+          (click)="toggleExpand(log.id)"
+        >
+          <!-- ── Card Header (always visible) ── -->
+          <div class="log-card__header">
+            <div class="log-card__meta">
+              <span [class]="log.severity | severityClass">
+                {{ log.severity | severityIcon }} {{ log.severity }}
+              </span>
+              <h3 class="log-card__issue">{{ log.issue }}</h3>
+            </div>
+            <div class="log-card__actions">
+              <span class="log-card__date">{{
+                log.createdAt | date: "short"
+              }}</span>
+              <button
+                class="btn-delete"
+                (click)="deleteLog(log.id, $event)"
+                title="Delete"
+              >
+                🗑
+              </button>
+              <span
+                class="log-card__chevron"
+                [class.log-card__chevron--open]="isExpanded(log.id)"
+                >›</span
+              >
+            </div>
+          </div>
+
+          <!-- Log preview (visible when collapsed) -->
+          @if (!isExpanded(log.id)) {
+            <p class="log-card__preview">{{ truncate(log.logText) }}</p>
+          }
+
+          <!-- ── Expanded Detail ── -->
+          @if (isExpanded(log.id)) {
+            <div class="log-detail" (click)="$event.stopPropagation()">
+              <!-- Raw log -->
+              <div class="log-detail__section">
+                <div class="log-detail__label">Raw Log</div>
+                <pre class="log-detail__raw">{{ log.logText }}</pre>
+              </div>
+
+              <!-- Explanation -->
+              <div class="log-detail__section">
+                <div class="log-detail__label">📋 Explanation</div>
+                <p class="log-detail__text">{{ log.explanation }}</p>
+              </div>
+
+              <!-- Solution -->
+              <div class="log-detail__section">
+                <div class="log-detail__label">🔧 Recommended Solution</div>
+                <div class="log-detail__solution">{{ log.solution }}</div>
+              </div>
+
+              <!-- Footer meta -->
+              <div class="log-detail__footer">
+                <span>ID: {{ log.id }}</span>
+                <span>{{ log.createdAt | date: "medium" }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Pagination -->
+    @if (totalPages > 1) {
+      <div class="pagination">
+        <button
+          class="page-btn"
+          [disabled]="currentPage() === 1"
+          (click)="goToPage(currentPage() - 1)"
+        >
+          ←
+        </button>
+        <span class="page-info"
+          >Page {{ currentPage() }} of {{ totalPages }}</span
+        >
+        <button
+          class="page-btn"
+          [disabled]="currentPage() === totalPages"
+          (click)="goToPage(currentPage() + 1)"
+        >
+          →
+        </button>
+      </div>
+    }
+  }
+</div>

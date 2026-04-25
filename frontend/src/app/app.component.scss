@@ -1,0 +1,108 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Navbar ────────────────────────────────────────────────────────────────
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(11, 14, 23, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+
+  &__inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  &__logo {
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  &__name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  &__link {
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color 0.15s, background 0.15s;
+
+    &:hover {
+      color: var(--color-text-primary);
+      background: rgba(255,255,255,0.05);
+    }
+
+    &--active {
+      color: var(--color-accent-light);
+      background: rgba(99, 102, 241, 0.1);
+    }
+  }
+
+  &__github {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    border-radius: 6px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    margin-left: 0.5rem;
+    transition: color 0.15s;
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+  }
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────
+.main {
+  flex: 1;
+  padding: 1rem 0 3rem;
+}
+
+// ── Footer ────────────────────────────────────────────────────────────────
+.footer {
+  border-top: 1px solid var(--color-border);
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+
+  a {
+    color: var(--color-accent-light);
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}
