@@ -8,13 +8,13 @@ Built to help developers quickly diagnose production issues without manually dig
 
 ## 🚀 Tech Stack
 
-| Layer     | Technology                              |
-|-----------|-----------------------------------------|
-| Frontend  | Angular 17 · TypeScript · SCSS          |
-| Backend   | .NET 8 · ASP.NET Core Web API           |
-| Database  | MongoDB                                 |
-| AI        | OpenAI API (GPT-4o-mini)                |
-| Patterns  | DI · Options Pattern · Repository-style |
+| Layer    | Technology                              |
+| -------- | --------------------------------------- |
+| Frontend | Angular 17 · TypeScript · SCSS          |
+| Backend  | .NET 8 · ASP.NET Core Web API           |
+| Database | MongoDB                                 |
+| AI       | OpenAI API (GPT-4o-mini)                |
+| Patterns | DI · Options Pattern · Repository-style |
 
 ---
 
@@ -118,12 +118,12 @@ The app will be available at `http://localhost:4200`
 
 ## 📡 API Endpoints
 
-| Method   | Endpoint                    | Description                     |
-|----------|-----------------------------|---------------------------------|
-| `POST`   | `/api/logs/analyze`         | Analyze a log entry with AI     |
-| `GET`    | `/api/logs`                 | Get paginated log history       |
-| `GET`    | `/api/logs/{id}`            | Get a single log entry          |
-| `DELETE` | `/api/logs/{id}`            | Delete a log entry              |
+| Method   | Endpoint            | Description                 |
+| -------- | ------------------- | --------------------------- |
+| `POST`   | `/api/logs/analyze` | Analyze a log entry with AI |
+| `GET`    | `/api/logs`         | Get paginated log history   |
+| `GET`    | `/api/logs/{id}`    | Get a single log entry      |
+| `DELETE` | `/api/logs/{id}`    | Delete a log entry          |
 
 ### Example Request
 
@@ -158,29 +158,12 @@ Content-Type: application/json
 
 ```json
 {
-  "_id":         "ObjectId",
-  "logText":     "string",
-  "issue":       "string",
-  "severity":    "critical | high | medium | low | info",
+  "_id": "ObjectId",
+  "logText": "string",
+  "issue": "string",
+  "severity": "critical | high | medium | low | info",
   "explanation": "string",
-  "solution":    "string",
-  "createdAt":   "ISODate"
+  "solution": "string",
+  "createdAt": "ISODate"
 }
 ```
-
----
-
-## 🔮 Future Improvements
-
-- [ ] Authentication (JWT)
-- [ ] Log history dashboard with severity charts
-- [ ] Bulk log upload (file drag & drop)
-- [ ] Export analysis as PDF
-- [ ] WebSocket streaming for real-time AI responses
-- [ ] Docker Compose setup
-
----
-
-## 📄 License
-
-MIT
